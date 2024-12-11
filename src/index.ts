@@ -110,9 +110,9 @@ async function initialize() {
     await testAgent.authenticate()
     jetstreamSubscription = new JetstreamSubscription(
         handlers,
-        <string>Bun.env.JETSTREAM_URL
+        <string>Bun.env.JETSTREAM_URL,
+        [<string>Bun.env.USER_DID]
     );
-
 }
 
 initialize().then(() =>{
