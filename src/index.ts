@@ -50,8 +50,7 @@ let handlers = {
                     LogInputTextAction.make("Post")
                 ],
                 testAgent
-            ),
-            GoodBotHandler.make(testAgent)
+            )
         ]
     },
     like: {
