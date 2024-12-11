@@ -1,0 +1,22 @@
+{
+  "name": "user-tracker",
+  "description": "Tracks and reports on a users actions",
+  "version": "0.0.0",
+  "author": "Juni",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build --target=bun ./src/index.ts --outfile=./build/index.ts"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bsky-event-handlers": "2.1.0-beta.1",
+    "@atproto/api": "^0.13.19"
+  },
+  "license": "MIT"
+}
