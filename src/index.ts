@@ -22,7 +22,7 @@ import {
 } from 'bsky-event-handlers';
 
 const testAgent = new HandlerAgent(
-    'test-bot',
+    'user-tracker',
     <string>Bun.env.TRACKER_BSKY_HANDLE,
     <string>Bun.env.TRACKER_BSKY_PASSWORD
 );
