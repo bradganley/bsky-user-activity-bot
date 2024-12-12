@@ -41,12 +41,23 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron posted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject =>{
-                    return {
-                        cid: MessageHandler.getCidFromMessage(handler, commit),
-                        uri: MessageHandler.getUriFromMessage(handler, commit)
-                    }
-                }),
+                    CreateSkeetAction.make(
+                        (handler: HandlerAgent, commit: JetstreamEventCommit): string => {
+                            // @ts-ignore
+                            let text = "\"" + commit.commit.record?.text + "\"";
+                            if(text.length > 300){
+                                text = text.substring(1, 301)
+                            }
+                            return text;
+                        },
+                        undefined,
+                        (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
+                            return {
+                                cid: MessageHandler.getCidFromMessage(handler, commit),
+                                uri: MessageHandler.getUriFromMessage(handler, commit)
+                            }
+                        }),
+
                     LogInputTextAction.make("Post")
                 ],
                 testAgent
@@ -59,7 +70,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject =>{
+                    CreateSkeetAction.make("Aaron liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Like")
@@ -74,7 +85,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject =>{
+                    CreateSkeetAction.make("Aaron reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Repost")
@@ -104,7 +115,6 @@ let handlers = {
 }
 
 
-
 async function initialize() {
     await testAgent.authenticate()
     jetstreamSubscription = new JetstreamSubscription(
@@ -114,7 +124,7 @@ async function initialize() {
     );
 }
 
-initialize().then(() =>{
+initialize().then(() => {
     jetstreamSubscription.createSubscription()
     DebugLog.info("INIT", 'Initialized!')
 });
