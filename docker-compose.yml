@@ -10,7 +10,8 @@ services:
     env_file:
       - .env
     environment:
-      - NAME=bork
+      - NAME=Aaron
+      - USER_DID=did:plc:ksjfbda7262bbqmuoly54lww
     networks:
       - bun
 

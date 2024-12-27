@@ -115,7 +115,7 @@ async function initialize() {
 
 initialize().then(() => {
     jetstreamSubscription.createSubscription()
-    DebugLog.info("INIT", 'Initialized!')
+    DebugLog.info("INIT", 'Initialized and watching ' + <string>Bun.env.NAME + ' (' + <string>Bun.env.USER_DID + ')')
 });
 
 
