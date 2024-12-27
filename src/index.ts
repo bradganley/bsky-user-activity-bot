@@ -59,7 +59,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
+                    CreateSkeetAction.make(<string>Bun.env.NAME +" liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Like")
@@ -74,7 +74,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
+                    CreateSkeetAction.make(<string>Bun.env.NAME + " reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Repost")
