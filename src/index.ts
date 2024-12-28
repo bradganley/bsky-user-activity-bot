@@ -33,7 +33,7 @@ let handlers = {
                     CreateSkeetAction.make(
                         (handler: HandlerAgent, commit: JetstreamEventCommit): string => {
                             // @ts-ignore
-                            let text = "\"" + commit.commit.record?.text + "\"";
+                            let text = <string>Bun.env.NAME + " posted \"" + commit.commit.record?.text + "\"";
                             if(text.length > 300){
                                 text = text.substring(1, 301)
                             }
@@ -59,7 +59,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
+                    CreateSkeetAction.make(<string>Bun.env.NAME +" liked:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Like")
@@ -74,7 +74,7 @@ let handlers = {
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
                 [
-                    CreateSkeetAction.make("Aaron reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
+                    CreateSkeetAction.make(<string>Bun.env.NAME + " reposted:", undefined, (handler: HandlerAgent, commit: JetstreamEventCommit): JetstreamSubject => {
                         return commit.commit.record.subject as JetstreamSubject;
                     }),
                     LogInputTextAction.make("Repost")
@@ -93,7 +93,7 @@ let handlers = {
                 [
                     CreateSkeetAction.make((handler: HandlerAgent, event: JetstreamEventCommit): string => {
                         const blockedDid = event.commit.record.subject
-                        return "Aaron blocked a user: " + blockedDid;
+                        return <string>Bun.env.NAME + " blocked a user: " + blockedDid;
                     }, undefined, undefined),
                     LogInputTextAction.make("Block"),
                 ],
@@ -115,7 +115,7 @@ async function initialize() {
 
 initialize().then(() => {
     jetstreamSubscription.createSubscription()
-    DebugLog.info("INIT", 'Initialized!')
+    DebugLog.info("INIT", 'Initialized and watching ' + <string>Bun.env.NAME + ' (' + <string>Bun.env.USER_DID + ')')
 });
 
 

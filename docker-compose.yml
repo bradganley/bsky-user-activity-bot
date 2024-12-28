@@ -9,12 +9,21 @@ services:
       - ./sessionData:/sessionData
     env_file:
       - .env
+    environment:
+      - NAME=Aaron
+      - USER_DID=did:plc:ksjfbda7262bbqmuoly54lww
+      #- TRACKER_BSKY_HANDLE=
+      #- TRACKER_BSKY_PASSWORD=
+      #- DEBUG_LOG_ACTIVE=true
+      #- DEBUG_LOG_LEVEL=info
+      #- JETSTREAM_URL='ws://jetstream:6008/subscribe'
+      #- SESSION_DATA_PATH='/sessionData'
     networks:
       - bun
 
 
   jetstream:
-    image: "ghcr.io/juni-b-queer/jetstream-new:personal-branch"
+    image: "ghcr.io/bluesky-social/jetstream:sha-ea96859b93d1790ff20bb168e5fc442d462cea1e" 
     container_name: jetstream
     restart: unless-stopped
     environment:
@@ -29,3 +38,6 @@ services:
 networks:
   bun:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16
