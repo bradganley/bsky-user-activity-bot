@@ -33,7 +33,7 @@ let handlers = {
                     CreateSkeetAction.make(
                         (handler: HandlerAgent, commit: JetstreamEventCommit): string => {
                             // @ts-ignore
-                            let text = "\"" + commit.commit.record?.text + "\"";
+                            let text = <string>Bun.env.NAME + " posted \"" + commit.commit.record?.text + "\"";
                             if(text.length > 300){
                                 text = text.substring(1, 301)
                             }
@@ -93,7 +93,7 @@ let handlers = {
                 [
                     CreateSkeetAction.make((handler: HandlerAgent, event: JetstreamEventCommit): string => {
                         const blockedDid = event.commit.record.subject
-                        return "Aaron blocked a user: " + blockedDid;
+                        return <string>Bun.env.NAME + " blocked a user: " + blockedDid;
                     }, undefined, undefined),
                     LogInputTextAction.make("Block"),
                 ],
