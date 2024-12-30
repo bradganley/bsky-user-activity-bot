@@ -3,8 +3,6 @@ services:
   bskybot:
     build: .
     restart: unless-stopped
-    volumes:
-      - ./sessionData:/sessionData
     env_file:
       - .env
     environment:
@@ -16,11 +14,4 @@ services:
       #- DEBUG_LOG_LEVEL=info
       #- JETSTREAM_URL='wss://jestream1.us-west.bsky.network/subscribe'
       #- SESSION_DATA_PATH='/sessionData'
-    networks:
-      - bun
-networks:
-  bun:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.10.0.0/16
+    networks_mode: bridge
