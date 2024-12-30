@@ -1,8 +1,6 @@
 version: "3.8"
 services:
   bskybot:
-    depends_on:
-      - jetstream
     build: .
     restart: unless-stopped
     volumes:
@@ -16,25 +14,10 @@ services:
       #- TRACKER_BSKY_PASSWORD=
       #- DEBUG_LOG_ACTIVE=true
       #- DEBUG_LOG_LEVEL=info
-      #- JETSTREAM_URL='ws://jetstream:6008/subscribe'
+      #- JETSTREAM_URL='wss://jestream1.us-west.bsky.network/subscribe'
       #- SESSION_DATA_PATH='/sessionData'
     networks:
       - bun
-
-
-  jetstream:
-    image: "ghcr.io/bluesky-social/jetstream:sha-ea96859b93d1790ff20bb168e5fc442d462cea1e" 
-    container_name: jetstream
-    restart: unless-stopped
-    environment:
-      - CURSOR_FILE=/data/cursor.json
-    ports:
-      - "6008:6008"
-    volumes:
-      - ./data:/data
-    networks:
-      - bun
-
 networks:
   bun:
     driver: bridge
