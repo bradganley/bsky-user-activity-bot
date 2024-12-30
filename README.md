@@ -9,7 +9,7 @@ https://hub.docker.com/r/bradganley/buab
 ```
 services:
   bskybot_1:
-    image: bradganley/buab:0.0.1
+    image: bradganley/buab:latest
     restart: unless-stopped
     volumes:
       - ./sessionData:/sessionData
