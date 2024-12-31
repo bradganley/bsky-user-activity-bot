@@ -10,8 +10,8 @@ services:
     env_file:
       - .env
     environment:
-      - NAME=Aaron
-      - USER_DID=did:plc:ksjfbda7262bbqmuoly54lww
+      - NAME=TEST
+      - USER_DID=did:plc:example
       #- TRACKER_BSKY_HANDLE=
       #- TRACKER_BSKY_PASSWORD=
       #- DEBUG_LOG_ACTIVE=true
