@@ -1,6 +1,6 @@
 FROM oven/bun:latest AS base
 WORKDIR /usr/src/app
-RUN mkdir /sessionData && chmod 177 /sessionData
+RUN mkdir /sessionData && chmod 777 /sessionData
 # install dependencies into temp directory
 # this will cache them and speed up future builds
 FROM base AS install
