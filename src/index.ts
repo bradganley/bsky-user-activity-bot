@@ -25,7 +25,7 @@ let jetstreamSubscription: JetstreamSubscription;
 
 let handlers = {
     post: {
-        c: [
+        c: (Bun.env.POST_EVENT !== "false" ? [
             new MessageHandler(
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
@@ -52,9 +52,11 @@ let handlers = {
                 testAgent
             )
         ]
+        : []
+    )
     },
     like: {
-        c: [
+        c: (Bun.env.LIKE_EVENT !== "false" ? [
             new MessageHandler(
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
@@ -67,9 +69,11 @@ let handlers = {
                 testAgent
             )
         ]
+        : []
+    )
     },
     repost: {
-        c: [
+        c: (Bun.env.REPOST_EVENT !== "false" ? [
             new MessageHandler(
                 // @ts-ignore
                 [ActionTakenByUserValidator.make(<string>Bun.env.USER_DID)],
@@ -82,9 +86,11 @@ let handlers = {
                 testAgent
             )
         ]
+        : []
+    )
     },
     block: {
-        c: [
+        c: (Bun.env.BLOCK_EVENT !== "false" ? [
             new MessageHandler(
                 // @ts-ignore
                 [
@@ -100,6 +106,8 @@ let handlers = {
                 testAgent
             )
         ]
+        : []
+    )
     }
 }
 
